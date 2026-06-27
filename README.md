@@ -62,7 +62,7 @@ The reliable lever is **writing less code**, via the ladder in `AGENTS.md`: befo
 ## Install
 
 ```
-git clone https://github.com/<your-username>/phurti.git
+git clone https://github.com/Tushar-Bhowal/Phurti.git phurti
 cd phurti
 bash install.sh
 ```

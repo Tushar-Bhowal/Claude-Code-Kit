@@ -18,8 +18,8 @@
 workflow for AI coding agents. One ruleset and one set of skills, installed once, working across
 agents. The idea: less code, fewer tokens, less manual effort — without cutting corners on safety.
 
-- **Repo:** `https://github.com/Tushar-Bhowal/Claude-Code-Kit` (public, MIT) — **to be renamed to
-  `phurti`**; the README clone command still has a `<your-username>` placeholder to fill.
+- **Repo:** `https://github.com/Tushar-Bhowal/Phurti` (public, MIT). The clone command clones into a
+  lowercase `phurti/` directory so every `cd phurti` step works cross-platform.
 - **Status:** in testing / evolving. Sound in design and mechanically tested; not yet battle-tested
   across weeks of real use, and the multi-agent reach is uneven (see §4).
 - **Audience:** full-stack developers. Claude Code is the first-class path; Codex, Copilot, and
@@ -230,7 +230,7 @@ higher quality floor — not a guaranteed lower bill. Do not cite outside benchm
 
 **Install (anyone):**
 ```
-git clone https://github.com/<your-username>/phurti.git
+git clone https://github.com/Tushar-Bhowal/Phurti.git phurti
 cd phurti
 bash install.sh
 ```
@@ -243,8 +243,10 @@ steps for Copilot and Antigravity. Non-destructive, safe to re-run.
 
 ## 13. Known open items / TODO
 
-- [ ] **Rename the GitHub repo** `Claude-Code-Kit` → `phurti` (or push to a fresh `phurti` repo).
-- [ ] **README clone command** still has `<your-username>` — replace with the real path.
+- [x] **Rename the GitHub repo** — done: now `Tushar-Bhowal/Phurti`.
+- [x] **README clone command** — now clones the real URL into a `phurti/` dir (works pre- and post-rename).
+- [x] **Generate + commit the adapters** — `.github/copilot-instructions.md` and `.agents/rules/phurti.md`
+  now exist in the repo, so the Copilot/Antigravity "copy this in" steps point at real files.
 - [ ] **Claim the name** — `phurti` is free on npm and has no GitHub project; grab it if publishing.
 - [ ] **Smoke test as a stranger** — clone fresh on a clean machine and run `install.sh` start to finish.
 - [ ] **Optional CI**: run `scripts/build-adapters.sh --check` on push so adapter drift can't reach `main`.

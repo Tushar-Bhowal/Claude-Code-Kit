@@ -11,7 +11,10 @@ Fix the bug at its **root cause**, not the symptom — a symptom patch guarantee
 
 If `$ARGUMENTS` is empty, ask me what's broken — the symptom, any error or stack trace, and how to trigger it — before touching anything. (For a hard or subtle bug, prefix your request with `ultrathink` to reason more deeply.)
 
+If `$ARGUMENTS` points at an audit findings file (`.claude/plans/audit-findings-*.md`) or just says to fix the audit findings: read that file and work through each **unchecked** item tagged `→ /phurti-fix`, in severity order, ticking it off (`- [x]`) as each is fixed and verified. The file already gives the `file:line` and the concrete fix — don't make me restate them, and don't re-audit. The citation replaces the "reproduce from a vague report" step, but still apply the rest below per item: confirm the root cause from the real code, make the smallest correct change, add a regression test, and show evidence. Leave items tagged `→ /phurti-feature` (new/missing work) for that skill. Run the project's typecheck/build/test suite once at the end across all the fixes.
+
 ## 1. Reproduce before you fix
+- Give a one-line model read first: a typo / one-line fix is Haiku-sized, a localized one-or-two-file bug is Sonnet-sized, and only a subtle multi-system root-cause hunt needs Opus. Lean cheap on the clear cases — recommend Sonnet/Haiku when it's plainly enough, and add "bump to Opus if it gets hairy." If that differs from my current model, tell me to switch with `/model` before you dig in. You can't switch it yourself — just recommend and proceed on whatever I'm using.
 - Restate the bug in one line (read through typos), and confirm you can actually trigger it.
 - Write a FAILING test that captures it — or, if there's no test setup, a concrete command/steps that reproduce it reliably. You don't understand a bug until you can make it fail on demand.
 - If you can't reproduce it, or the report is too vague to pin down, STOP and ask. Never fix a bug you haven't reproduced.

@@ -85,14 +85,20 @@ phurti/
   tasks), implement (clean comments, the ladder), verify with evidence, route to a domain review
   agent, update project memory if something durable changed, commit **only when asked** (no AI
   attribution), remind to `/clear`.
-- **`/phurti-fix`** — bug-shaped: reproduce with a failing test → find the real root cause (read the
-  full code path, check what recently changed, hypothesize and falsify) → smallest correct diff →
-  regression test → verify. Points to `/phurti-feature` for larger work.
-- **`/phurti-audit`** — read-only review of the diff/path/repo. Runs the deterministic checks first
+- **`/phurti-fix`** — bug-shaped: recommend the cheapest sufficient model (Haiku/Sonnet/Opus, lean
+  cheap on clear cases) → reproduce with a failing test → find the real root cause (read the full code
+  path, check what recently changed, hypothesize and falsify) → smallest correct diff → regression
+  test → verify. Points to `/phurti-feature` for larger work.
+- **`/phurti-audit`** — read-only review of the diff/path/repo. Recommends a model for the scope
+  (Sonnet for a small/single-area audit since the review agents are Sonnet anyway; Opus only for
+  whole-repo/architectural). Runs the deterministic checks first
   (typecheck/lint/build/tests — exact, non-hallucinated signal), routes to domain agents, verifies
   each finding (`file:line`, confirmed against real behavior), explicit "do NOT flag" list, then a
   recall-oriented completeness pass ("what did I miss?", scaled to stakes) before one prioritized
-  report (Critical/Important/Minor). No edits, no commits.
+  report (Critical/Important/Minor). Read-only on the codebase — its one permitted write is the
+  findings file `.claude/plans/audit-findings-<scope>.md` (a checkbox per finding, `file:line` + a
+  plain 2–3 line fix, each tagged `→ /phurti-fix` or `→ /phurti-feature`), so the fix is one paste
+  away instead of a re-typed spec. No code edits, no commits.
 - **`/phurti-memory`** — generate/audit/prune a lean project memory file (`AGENTS.md`, or `CLAUDE.md`
   on Claude Code). Leaves good lines alone; proposes only gaps and trims.
 

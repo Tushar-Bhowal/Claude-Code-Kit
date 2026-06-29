@@ -127,6 +127,7 @@ If a goal matters to you, open an issue or PR.
 - **Rules vs hooks:** skills and rules are *followed* reliably; hooks *enforce* the two non-negotiable ones every time — but hooks only run on Claude Code/Codex. Elsewhere those rules are advisory.
 - **Skills are largely portable** (the Agent Skills spec is cross-tool), but each host's exact paths differ; the install notes cover the ones built here.
 - **Heuristics aren't perfect:** the test-protect hook can occasionally flag a legit refactor; the model recommendation is a judgment call. Tune to your stack as you use it.
+- **Secrets:** install adds native `permissions.ask` rules so the agent must **ask before reading a `.env`** (even in auto-accept mode), and the ruleset forbids hardcoding secrets or committing `.env` values. These are defense-in-depth, not a wall — keep real keys out of the machine the agent sees (dummy values locally; real secrets only in your deploy environment). For commit-time protection, add a real secret-scanner (e.g. **gitleaks** or **trufflehog**) as a git pre-commit hook — the kit recommends it but doesn't install it, and a git-level scanner protects you across every agent, not just Claude Code.
 
 ## License
 

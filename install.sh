@@ -64,8 +64,13 @@ if not has("protect-tests.py"):
 start = s["hooks"].setdefault("SessionStart", [])
 if not any("session-status.py" in h.get("command","") for e in start for h in e.get("hooks",[])):
     start.append({"hooks":[{"type":"command","command":"python3 ~/.claude/hooks/session-status.py"}]})
+# Make the agent ask before reading a secret file, even in auto-accept mode.
+ask = s.setdefault("permissions", {}).setdefault("ask", [])
+for rule in ["Read(./.env)", "Read(./.env.*)", "Bash(cat .env*)", "Bash(printenv*)", "Bash(env)"]:
+    if rule not in ask:
+        ask.append(rule)
 json.dump(s, open(p,"w"), indent=2)
-print("  merged hooks into", p)
+print("  merged hooks + .env access prompts into", p)
 PYEOF
 
 # ---- Codex CLI (always-on ruleset via AGENTS.md) ----

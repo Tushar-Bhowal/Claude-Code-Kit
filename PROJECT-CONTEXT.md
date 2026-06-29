@@ -73,7 +73,7 @@ phurti/
 ├── .github/copilot-instructions.md # GENERATED adapter — GitHub Copilot rules
 ├── .agents/rules/phurti.md         # GENERATED adapter — Antigravity rules
 ├── scripts/build-adapters.sh       # regenerates the adapters from AGENTS.md; --check fails on drift
-├── install.sh                      # installs per host (Claude full, Codex rules); prints copilot/antigravity steps
+├── install.sh                      # installs per host (Claude full, Codex rules); adds .env ask-prompts; prints copilot/antigravity steps
 ├── update.sh                       # same install + restart reminder
 ├── README.md   LICENSE (MIT)   .gitignore   PROJECT-CONTEXT.md (this file)
 ```
@@ -206,6 +206,7 @@ higher quality floor — not a guaranteed lower bill. Do not cite outside benchm
 - **Descriptions, not personas, on agents** — job-shaped descriptions route reliably.
 - **`/phurti-feature` does NOT audit memory** — that's `/phurti-memory`'s job; keep them separate.
 - **No external project names anywhere** — describe patterns generically; don't borrow others' metrics.
+- **Secret protection uses native permissions, not a custom regex hook** — install adds `.env` `ask`-rules to `settings.json` (the agent must prompt before reading a secret file, even in auto mode), and `AGENTS.md` forbids hardcoding secrets. Commit-time scanning is a documented gitleaks/trufflehog recommendation, not a reinvented scanner (a git-level scanner also covers all agents, not just Claude Code). Defense-in-depth — the real boundary is keeping real keys off the machine the agent reads.
 
 ---
 
